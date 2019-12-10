@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Student(){
+
+        }
+        function StudentBuilder(){
+            this.student = new Student();
+
+            this.setName = function(name){
+                this.student.name = name;
+            }
+
+            this.setGender = function(gender){
+                this.student.gender = gender;
+            }
+
+            this.setHairlength = function (hairlength) {
+                if(
+                    (this.student.gender == "男" && hairlength>2) || 
+                    (this.student.gender == "女" && hairlength>25)
+                
+                ) throw "剪头发去"
+                this.student.hairlength = hairlength;
+            }
+
+            this.build = function(){
+                return this.student;
+            }
+            
+        }
+
+        var builder = new StudentBuilder();
+        builder.setName('w-h-h');
+        builder.setGender('女');
+        builder.setHairlength(3);
+
+        var whh = builder.build();
+        console.log(whh)
+
+    </script>
+</body>
+</html>

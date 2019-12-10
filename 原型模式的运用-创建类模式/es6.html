@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <table id=roster>
+        
+    </table>
+    <script>
+        let table = document.getElementById('roster');
+        class Student{
+            constructor (name, genter, score){
+                this.name = name;
+                this.genter = genter;
+                this.score = score;
+                this.quality = 100;
+                this.mount();
+            }
+            
+            /*
+                将数据转化成html并插入到表格中
+            */
+            mount() {
+                let tr = document.createElement('tr');
+                tr.innerHTML = '<td>' + this.name + '</td>' + '<td>' + this.genter + '</td>' + '<td>' + this.score + '</td>' + '<td>' + this.quality + '</td>';
+                table.appendChild(tr);
+            }
+            
+        }
+        let whh = new Student('whh','女','88');
+        let lisi = new Student('lisi','男','66');
+
+    </script>
+</body>
+</html>
