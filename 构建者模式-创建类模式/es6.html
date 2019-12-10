@@ -7,6 +7,46 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <script>
+        class Student{
+
+        }
+        class StudentBuilder{
+            constructor(){
+                this.student = new Student();
+            }
+
+            setName(name) {
+                this.student.name = name;
+            }
+
+            setGender(gender) {
+                this.student.gender = gender;
+            }
+
+            setHairlength(hairlength) {
+                if (
+                    (this.student.gender == "男" && hairlength > 2) ||
+                    (this.student.gender == "女" && hairlength > 25)
+
+                ) throw "剪头发去"
+                this.student.hairlength = hairlength;
+            }
+
+            build() {
+                return this.student;
+            }
+
+        }
+
+        var builder = new StudentBuilder();
+        builder.setName('w-h-h');
+        builder.setGender('女');
+        builder.setHairlength(3);
+
+        var whh = builder.build();
+        console.log(whh)
+
+    </script>
 </body>
 </html>

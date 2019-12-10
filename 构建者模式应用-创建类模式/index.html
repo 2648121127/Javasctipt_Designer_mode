@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id=create>
+        <div>
+            姓名：
+            <input type="text" name="name" autofocus>
+        </div>
+        <div>
+            性别：
+            <input type="radio" name="genter" value="女" checked>女
+            <input type="radio" name="genter" value="男">男
+        </div>
+        <div>
+            头发长度：
+            <input type="number" name="hairlength">
+        </div>
+        <div>
+            <button type="submit">创建</button>
+        </div>
+    </form>
+
+    <script>
+        var createForm = document.getElementById("create");
+
+        init();
+        function init(){
+            createForm.addEventListener("submit",function(e){
+                e.preventDefault();
+                var name = document.querySelector('[name=name]').value;
+                var genter = document.querySelector("[name=genter]:checked").value;
+                var hairlength = document.querySelector("[name=hairlength]").value;
+                
+                try{
+                    var builder = new StudentBuilder();
+                    builder.setName(name);
+                    builder.setGender(genter);
+                    builder.setHairlength(hairlength);
+                    var student = builder.build();
+                }catch(e){
+                    alert(e)
+                }
+                console.log(student)
+            })
+        }
+
+        class Student {
+
+        }
+        class StudentBuilder {
+            constructor() {
+                this.student = new Student();
+            }
+
+            setName(name) {
+                this.student.name = name;
+            }
+
+            setGender(gender) {
+                this.student.gender = gender;
+            }
+
+            setHairlength(hairlength) {
+                if (
+                    (this.student.gender == "男" && hairlength > 2) ||
+                    (this.student.gender == "女" && hairlength > 25)
+
+                ) throw "剪头发去"
+                this.student.hairlength = hairlength;
+            }
+
+            build() {
+                return this.student;
+            }
+
+        }
+    </script>
+</body>
+</html>
