@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id=create>
+        <div>
+            名字：
+            <input type="text" name="name">
+        </div>
+        <div>
+            学科：
+            <select name="type">
+                <option value="文科">文科</option>
+                <option value="理科">理科</option>
+                <option value="体育">体育</option>
+            </select>
+        </div>
+        <div>
+        
+            <button type="submit">创建</button>
+        </div>
+    </form>
+    <script>
+        var createForm = document.getElementById("create");
+
+        init();
+        function init(){
+           createForm.addEventListener('submit',function(e){
+                e.preventDefault();
+                var name = document.querySelector('[name=name]').value;
+                var type = document.querySelector('[name=type]').value;
+
+                var student = studentFactory(name,type);
+                createForm.reset();
+                console.log(student);
+                
+           }) 
+        }
+
+        function Student(name,subjects){
+            this.name = name;
+            this.subjects = subjects;
+        }
+
+        function studentFactory(name,type){
+            switch(name,type){
+                case "文科":
+                    return new Student(name, ['政治', '历史', '地理']);
+                    break;
+                case "理科":
+                    return new Student(name, ['数学', '物理', '化学']);
+                    break;
+                case "体育":
+                    return new Student(name, ['长跑', '跳远', '。。。']);
+                    break;
+                default:
+                    throw "别瞎扯犊子"
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        余额：
+        <span id="barance">100</span>元
+    </div>
+    <div class="page a">
+        部门A：
+        <input type="number">
+        <button class="add">+</button>
+        <button class="sub">-</button>
+    </div>
+    <div class="page b">
+        部门B：
+        <input type="number">
+        <button class="add">+</button>
+        <button class="sub">-</button>
+    </div>
+
+    <script>
+        var elBarance = document.querySelector('#barance');
+        init();
+
+        function init(){
+            var a = new Division('.page.a');
+            var b = new Division('.page.b');
+        }
+        function renderBarance(){
+            var resouce = new Resouce(); 
+            elBarance.innerText = resouce.barance;
+        }
+        function Division(slector){
+            var resouce = new Resouce();
+            this.el = document.querySelector(slector);
+            this.elAdd = this.el.querySelector('.add');
+            this.elSub = this.el.querySelector('.sub');
+            this.elInput = this.el.querySelector('input');
+            var me = this;
+            this.elAdd.addEventListener('click',function(){
+                let i = me.elInput;
+                resouce.add(i.value);
+                renderBarance();
+                i.value = '';
+            });
+            this.elSub.addEventListener('click', function () {
+                let i = me.elInput;
+                resouce.sub(i.value);
+                renderBarance();
+                 i.value = '';
+            })
+        }
+
+        function Resouce() {
+            //如果不是第一次new，instance肯定是存在的
+            if (Resouce.instence) {
+                return Resouce.instence;
+            } else {//如果是第一次new，那么instance就是undefeated
+                //组装对象
+                this.barance = 100;
+                //将其存到Resouce机器上
+                Resouce.instence = this;
+            }
+        }
+        Resouce.prototype.add = function(num){
+            this.change(num);
+            // if(!num) return;
+            // this.barance += parseFloat(+num);
+        }
+        Resouce.prototype.sub = function (num) {
+            this.change(-num);
+            // if (!num) return;
+            // this.barance -= parseFloat(num);
+        }
+        Resouce.prototype.change = function(num){
+            if (!num) return;
+            this.barance += parseFloat(num);
+        }
+    </script>
+</body>
+</html>

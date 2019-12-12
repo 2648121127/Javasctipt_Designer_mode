@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+         js设计模式-单例模式:
+            定义：顾名思义，单例就是单一的意思，单例模式的定义是：保证一个类仅有一个一个实例，并提供一个访问它的全局访问点。
+            思路：新建对象时判断全局是否有该对象，如果有，就返回该对象，没有就创建一个新对象返回。
+        */
+
+        function Resouce(){
+            //如果不是第一次new，instance肯定是存在的
+            if(Resouce.instence){
+                return Resouce.instence;
+            }else{//如果是第一次new，那么instance就是undefeated
+                //组装对象
+                this.barance = 100;
+                //将其存到Resouce机器上
+                Resouce.instence = this;
+            }
+        }
+
+        var r = new Resouce();
+        console.log("r:",r);
+        r.barance = 50;
+
+        var r2 = new Resouce();
+        console.log("r2:", r2);
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //1*2*3*...n
+    //使用递归实现
+    function fn(n){
+        if(n==1) return 1;
+        return n*fn(n-1)
+    }
+    console.log(fn(3))
+    /*实现思路：
+    1）return 3*fn(2)
+    2) return 3*(2*fn(1))
+    3) return 3*(2*1)
+    4) return 3*(2)
+    5) return 6
+    */
+
+    //1+1+2+3+5+8+...+n
+
+    function fun(n){
+        if(n===1 || n===2){
+            return 1;
+        }
+        return fun(n-1)+fun(n-2)
+    }
+    console.log(fun(4))
+    
+    </script>
+</body>
+</html>

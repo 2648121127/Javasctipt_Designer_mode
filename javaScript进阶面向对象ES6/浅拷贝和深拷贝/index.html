@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+        //一、浅拷贝
+        //1.浅拷贝只是拷贝一层，更深层次级别的拷贝只引用。
+        //2.深拷贝拷贝多层，每一级别的数据都会被拷贝。
+        // var obj = {
+        //     id:1,
+        //     name:'jianmo',
+        //     msg:{
+        //         age:18
+        //     },
+        //     say:function(){
+        //         console.log('111111')
+        //     },
+        //     color: ['red', 'pink']
+        // }
+        // var o = {};
+        // for(var k in obj){
+        //     o[k] = obj[k]
+        // }
+        // console.log(o);
+        // // //浅拷贝只是拷贝一层，更深层次级别的拷贝只引用，所以o拷贝的只是msg内age的地址，他们两个还是共用的age，只要被修改，两个对象中的age都会变
+        // o.msg.age = 20;
+        // o.say = function(){
+        //     console.log('66666')
+        // };
+        // o.color = ['123','121'];
+        // console.log(obj);
+        // o.say();
+        // obj.say();
+
+        //Object.assign(target,...sources)  es6新增方法也可以实现浅拷贝
+        // Object.assign(o,obj);
+        // console.log(o);
+        // o.msg.age = 20;
+        // console.log(obj);
+
+
+        //二、深拷贝
+        //深拷贝拷贝多层，每一级别的数据都会被拷贝。
+        //方法1: 
+        // var obj = {
+        //     id: 1,
+        //     name: 'jianmo',
+        //     msg: {
+        //         age: 18,
+        //     },
+        //     obj1: {
+        //         arr: [34, 55, 5],
+        //         hand: function () {
+        //             console.log('hand')
+        //         },
+        //         obj3: {
+        //             a: 1,
+        //             take: function () {
+        //                 console.log('take')
+        //             }
+        //         }
+        //     },
+        //     color:['red','pink']
+        // }
+        // var o = {};
+        // //使用递归完成深拷贝
+        // function deepCopy(newObj,oldObj){
+        //     for (var k in oldObj) {
+        //         //判断数据属于什么数据类型
+        //         //1.获取属性值 oldObj[k]
+        //         var item = oldObj[k];
+        //         //2.判断属否属于数组  注：先判断数组，因为数组也类型也是Object
+        //         if(item instanceof Array){
+        //             newObj[k] = [];
+        //             deepCopy(newObj[k], item)
+        //         }else if(item instanceof Object){
+        //             //3.判断是否属于对象
+        //             newObj[k] = {};
+        //             deepCopy(newObj[k], item)
+        //         }else{
+        //             //4.属于简单数据类型
+        //             newObj[k] = item;
+        //         }
+        //     }
+        // }
+        // deepCopy(o,obj);
+        // console.log(o);
+        // o.obj1.arr = ['111','111','111'];
+        // console.log(obj)
+
+        //方法1.1
+        // 原始对象
+        // var obj = {
+        //     a: 1,
+        //     arr: [2, 3],
+        //     say: function () {
+        //         console.log('hello')
+        //     },
+        //     obj1: {
+        //         arr: [34, 55, 5],
+        //         hand: function () {
+        //             console.log('hand')
+        //         },
+        //         obj3: {
+        //             a: 1,
+        //             take: function () {
+        //                 console.log('take')
+        //             }
+        //         }
+        //     }
+        // };
+
+        // // 深复制逻辑(递归调用)
+        // function deepClone(obj) {
+        //     let objClone = Array.isArray(obj) ? [] : {};
+        //     if (obj && typeof obj === "object") {
+        //         for (key in obj) {
+        //             if (obj.hasOwnProperty(key)) {
+        //                 //判断obj子元素是否为对象，如果是，递归复制
+        //                 if (obj[key] && typeof obj[key] === "object") {
+        //                     objClone[key] = deepClone(obj[key]);
+        //                 } else {
+        //                     //如果不是，简单复制
+        //                     objClone[key] = obj[key];
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     return objClone;
+        // }
+
+        // // 开始深复制
+        // var shallowObj = deepClone(obj);
+
+        // // 改变复制后的新对象的属性值(第二层以及更深层次)
+        // shallowObj.obj1.obj3.take = function () {
+        //     console.log('shallowObj_take')
+        // }
+        // shallowObj.obj1.hand = function () {
+        //     console.log('shallowObj_hand')
+        // }
+
+        // shallowObj.obj1.obj3.take();  // shallowObj_take
+        // shallowObj.obj1.hand();      // shallowObj_hand
+
+        // obj.obj1.obj3.take();   // take
+        // obj.obj1.hand();     // hand
+        
+        //方法2: 除了递归，我们还可以借用JSON对象的parse和stringify
+        // function deepClone(obj) {
+        //     let _obj = JSON.stringify(obj),
+        //         objClone = JSON.parse(_obj);
+        //     return objClone
+        // }
+        // let a = [0, 1, [2, 3], 4],
+        //     b = deepClone(a);
+        // a[0] = 1;
+        // a[2][0] = 1;
+        // console.log(a, b);
+        
+
+
+        // 除了上面两种方法之外，我们还可以借用JQ的extend方法
+        // $.extend([deep], target, object1[, objectN])
+        // deep表示是否深拷贝，为true为深拷贝，为false，则为浅拷贝
+        // target Object类型 目标对象，其他对象的成员属性将被附加到该对象上。
+        // object1  objectN可选。 Object类型 第一个以及第N个被合并的对象。
+    
+        // let a = [0, 1, [2, 3], 4],
+        // b = $.extend(true, [], a);
+        // a[0] = 1;
+        // a[2][0] = 1;
+        // console.log(a, b);
+
+
+
+    </script>
+</body>
+</html>

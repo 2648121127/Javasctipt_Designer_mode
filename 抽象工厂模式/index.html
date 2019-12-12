@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Student(){
+            this.intro = "学生";
+        }
+        function Teacher(){
+            this.intro = "老师";
+        }
+
+        function studentFactory(){
+            return new Student();
+        }
+        function teacherFactory(){
+            return new Teacher();
+        }
+
+        // 抽象工厂模式不生产  选择工厂
+        function userProducer(factory){
+            switch(factory){
+                case "student":
+                    return studentFactory;
+                    break;
+                case "teacher":
+                    return teacherFactory;
+                    break;
+                default:
+                    throw "好好想想";
+                    break;
+            }
+        }
+
+        var factory = userProducer('student');
+        console.log(factory)
+        var t = factory();
+        console.log(t);
+    </script>
+</body>
+</html>
