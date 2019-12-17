@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Start(name,age){
+            this.name = name ;
+            this.age = age;
+        }  
+        //很多时候我们需要手动的利用constructor 这个属性指回原来你的构造函数。
+        // Start.prototype.sing   = function(){
+        //     console.log('I can sing');
+        // }
+        Start.prototype = {
+            // constructor:Start, //如果我们修改了原来的原型对象，给原型赋值的是一个对象，则必须手动的利用constructor指回原来的构造函数
+            sing:function(){
+                console.log('I can sing');
+            }
+
+        }
+        var ldh = new Start('ldh',18);
+        console.log(Start.prototype);
+        console.log(ldh.__proto__);     
+    </script>
+</body>
+</html>

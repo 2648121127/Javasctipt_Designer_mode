@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <button>click</button>
+
+    <script>
+        
+        // class Father{
+        //     constructor(x,y){ //constructor函数，类里面函数不要加function关键字
+        //         this.x = x;
+        //         this.y = y;
+        //         console.log(1111)
+        //     }
+        //     sum(){ //类里面的普通方法
+        //         console.log(this.x+this.y);
+        //     }
+        // }
+        // //继承父类
+        // class Son extends Father{
+        //     constructor(x,y){
+        //         super(x,y);
+        //         this.x = x;
+        //         this.y = y;
+        //     }
+        //     subtract(){
+        //         console.log(this.x-this.y);
+        //     }
+        // }
+        // var son = new Son(5,3);
+        // son.sum();
+        // son.subtract();
+        //1.继承中，如果实例化子类输出一个方法，先看子类有没有这个方法，如果有就先执行子类的方法。
+        //2.继承中，如果子类里面没有，就去查找父类有没有这个方法，如果有，就执行父类的这个方法（就近原则）
+        //3.super必须放在子类this之前(必须调用父类的构造函数才嫩调用子类的构造函数)
+
+        /*------------------------------------*/
+
+        var that;
+        class Star{
+            constructor(name,age){ 
+                //constructor 里面的this指向的是创建实例的对象
+                // console.log(this);   //Start
+                that = this;
+                this.name = name;
+                this.age = age;
+                // this.sing();
+                this.btn = document.querySelector('button');
+                this.btn.onclick = this.sing;  //不加括号，加括号就马上被调用了，这里要的是点击后才被调用
+            }
+            sing(){
+                console.log(this.name)
+            }
+        }
+        var ldh = new Start('ldh');
+        // console.log(that === ldh)  //true
+    </script>
+</body>
+</html>
